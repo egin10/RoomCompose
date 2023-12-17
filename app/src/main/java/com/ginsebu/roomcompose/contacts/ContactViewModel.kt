@@ -1,4 +1,4 @@
-package com.ginsebu.roomcompose
+package com.ginsebu.roomcompose.contacts
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -63,7 +63,7 @@ class ContactViewModel(
                     id = state.value.contact?.id,
                 )
 
-                // insert contact to room
+                // upsert contact to room
                 viewModelScope.launch {
                     dao.upsertContact(contact)
                 }

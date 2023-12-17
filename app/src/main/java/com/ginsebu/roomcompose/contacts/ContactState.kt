@@ -1,4 +1,4 @@
-package com.ginsebu.roomcompose
+package com.ginsebu.roomcompose.contacts
 
 data class ContactState(
     val contacts: List<Contact> = emptyList(),

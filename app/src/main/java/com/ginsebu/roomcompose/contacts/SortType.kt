@@ -1,4 +1,4 @@
-package com.ginsebu.roomcompose
+package com.ginsebu.roomcompose.contacts
 
 enum class SortType {
     FIRST_NAME,

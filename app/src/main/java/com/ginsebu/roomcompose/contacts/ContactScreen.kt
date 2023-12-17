@@ -1,12 +1,14 @@
-package com.ginsebu.roomcompose
+package com.ginsebu.roomcompose.contacts
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -29,12 +31,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ginsebu.roomcompose.location.LocationButton
+import com.ginsebu.roomcompose.location.LocationEvent
 
 @ExperimentalMaterial3Api
 @Composable
 fun ContactScreen(
     state: ContactState,
-    onEvent: (ContactEvent) -> Unit
+    onEvent: (ContactEvent) -> Unit,
+    onLocationEvent: (LocationEvent) -> Unit,
 ) {
     Scaffold(
         floatingActionButton = {
@@ -52,10 +57,14 @@ fun ContactScreen(
         if(state.isAddingContact) {
             AddContactDialog(state = state, onEvent = onEvent)
         }
+        
+        LocationButton(onEvent = onLocationEvent)
 
         LazyColumn(
             contentPadding = padding,
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 60.dp),
             verticalArrangement = Arrangement.Top,
         ) {
             // Radio Button

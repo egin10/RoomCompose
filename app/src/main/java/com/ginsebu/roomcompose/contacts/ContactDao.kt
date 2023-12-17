@@ -1,4 +1,4 @@
-package com.ginsebu.roomcompose
+package com.ginsebu.roomcompose.contacts
 
 import androidx.room.Dao
 import androidx.room.Delete

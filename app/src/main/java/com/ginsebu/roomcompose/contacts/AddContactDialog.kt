@@ -1,4 +1,4 @@
-package com.ginsebu.roomcompose
+package com.ginsebu.roomcompose.contacts
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box

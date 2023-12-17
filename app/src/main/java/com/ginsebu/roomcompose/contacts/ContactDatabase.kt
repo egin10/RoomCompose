@@ -1,4 +1,4 @@
-package com.ginsebu.roomcompose
+package com.ginsebu.roomcompose.contacts
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

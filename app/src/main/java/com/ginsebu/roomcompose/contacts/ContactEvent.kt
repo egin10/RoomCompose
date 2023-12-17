@@ -1,4 +1,4 @@
-package com.ginsebu.roomcompose
+package com.ginsebu.roomcompose.contacts
 
 sealed interface ContactEvent {
     object SaveContact: ContactEvent
