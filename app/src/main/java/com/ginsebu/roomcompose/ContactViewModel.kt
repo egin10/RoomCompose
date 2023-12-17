@@ -60,7 +60,9 @@ class ContactViewModel(
                     firstName = firstName,
                     lastName = lastName,
                     phoneNumber = phoneNumber,
+                    id = state.value.contact?.id,
                 )
+
                 // insert contact to room
                 viewModelScope.launch {
                     dao.upsertContact(contact)
@@ -71,7 +73,7 @@ class ContactViewModel(
                     firstName = "",
                     lastName = "",
                     phoneNumber = "",
-                    isEdit = false,
+                    contact = null,
                 ) }
             }
             is ContactEvent.SetFirstName -> {
@@ -103,7 +105,7 @@ class ContactViewModel(
                     firstName = event.contact.firstName,
                     lastName = event.contact.lastName,
                     phoneNumber = event.contact.phoneNumber,
-                    isEdit = true,
+                    contact = event.contact,
                 ) }
             }
         }

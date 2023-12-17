@@ -21,7 +21,7 @@ fun AddContactDialog(
 ) {
     AlertDialog(
         modifier = modifier,
-        title = { Text(text = if(state.isEdit) "Edit Contact" else "Add New Contact") },
+        title = { Text(text = if(state.contact != null) "Edit Contact" else "Add New Contact") },
         text = {
                Column(
                    verticalArrangement = Arrangement.SpaceBetween
@@ -57,7 +57,7 @@ fun AddContactDialog(
                 Button(onClick = {
                     onEvent(ContactEvent.SaveContact)
                 }) {
-                    Text(text = if(state.isEdit) "Update" else "Save")
+                    Text(text = if(state.contact != null) "Update" else "Save")
                 }
             }
         }
