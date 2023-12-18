@@ -19,5 +19,11 @@ class MainApp: Application() {
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
+
+        appModule = AppModuleImpl(this)
+    }
+
+    companion object {
+        lateinit var appModule: AppModule
     }
 }

@@ -27,7 +27,7 @@ fun LocationButton(
     ) {
         Button(
             modifier = Modifier
-                .width(100.dp)
+                .width(160.dp)
                 .clip(RoundedCornerShape(8.dp)),
             onClick = { onEvent(LocationEvent.Start) }
         ) {
@@ -36,7 +36,7 @@ fun LocationButton(
         Spacer(modifier = Modifier.width(10.dp))
         Button(
             modifier = Modifier
-                .width(100.dp)
+                .width(160.dp)
                 .clip(RoundedCornerShape(8.dp)),
             onClick = { onEvent(LocationEvent.Stop) }
         ) {

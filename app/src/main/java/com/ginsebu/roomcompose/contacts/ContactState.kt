@@ -8,4 +8,5 @@ data class ContactState(
     val isAddingContact: Boolean = false,
     val sortType: SortType = SortType.FIRST_NAME,
     val contact: Contact? = null,
+    val isDeleteContact: Boolean = false,
 )

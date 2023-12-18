@@ -9,5 +9,6 @@ sealed interface ContactEvent {
     object HideDialog: ContactEvent
     data class SortContacts(val sortType: SortType): ContactEvent
     data class DeleteContact(val contact: Contact): ContactEvent
+    data class ConfirmDeleteContact(val contact: Contact): ContactEvent
     data class EditContact(val contact: Contact): ContactEvent
 }

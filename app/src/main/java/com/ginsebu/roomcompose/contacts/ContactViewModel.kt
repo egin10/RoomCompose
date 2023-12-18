@@ -1,6 +1,7 @@
 package com.ginsebu.roomcompose.contacts
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -40,10 +41,24 @@ class ContactViewModel(
                 viewModelScope.launch {
                     dao.deleteContact(event.contact)
                 }
+
+                _state.update { it.copy(
+                    isAddingContact = false,
+                    contact = null,
+                    isDeleteContact = false,
+                ) }
+            }
+            is ContactEvent.ConfirmDeleteContact -> {
+                _state.update { it.copy(
+                    contact = event.contact,
+                    isDeleteContact = true,
+                ) }
             }
             ContactEvent.HideDialog -> {
                 _state.update { it.copy(
-                    isAddingContact = false
+                    isAddingContact = false,
+                    contact = null,
+                    isDeleteContact = false,
                 ) }
             }
             ContactEvent.SaveContact -> {

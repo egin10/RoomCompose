@@ -57,6 +57,10 @@ fun ContactScreen(
         if(state.isAddingContact) {
             AddContactDialog(state = state, onEvent = onEvent)
         }
+
+        if(state.isDeleteContact) {
+            DeleteContactDialog(state = state, onEvent = onEvent)
+        }
         
         LocationButton(onEvent = onLocationEvent)
 
@@ -127,7 +131,7 @@ fun ContactScreen(
                     }
                     // Delete Icon
                     IconButton(onClick = {
-                        onEvent(ContactEvent.DeleteContact(contact))
+                        onEvent(ContactEvent.ConfirmDeleteContact(contact))
                     }) {
                         Icon(
                             imageVector = Icons.Default.Delete,
