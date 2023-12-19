@@ -59,6 +59,9 @@ class ContactViewModel(
                     isAddingContact = false,
                     contact = null,
                     isDeleteContact = false,
+                    firstName = "",
+                    lastName = "",
+                    phoneNumber = "",
                 ) }
             }
             ContactEvent.SaveContact -> {

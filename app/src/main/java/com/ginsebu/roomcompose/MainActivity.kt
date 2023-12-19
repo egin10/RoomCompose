@@ -5,55 +5,21 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
-import com.ginsebu.roomcompose.contacts.ContactDatabase
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.ginsebu.roomcompose.contacts.ContactScreen
 import com.ginsebu.roomcompose.contacts.ContactViewModel
-import com.ginsebu.roomcompose.location.LocationButton
+import com.ginsebu.roomcompose.location.LocationScreen
 import com.ginsebu.roomcompose.location.LocationViewModel
 import com.ginsebu.roomcompose.ui.theme.RoomComposeTheme
 
 class MainActivity : ComponentActivity() {
-
-//    private val db by lazy {
-//        Room.databaseBuilder(
-//            applicationContext,
-//            ContactDatabase::class.java,
-//            "contacts.db",
-//        ).build()
-//    }
-
-//    private val viewModel by viewModels<ContactViewModel>(
-//        factoryProducer = {
-//            object : ViewModelProvider.Factory {
-//                override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-//                    return ContactViewModel(db.dao) as T
-//                }
-//            }
-//        }
-//    )
-//
-//    private val locationViewModel by viewModels<LocationViewModel>(
-//        factoryProducer = {
-//            object : ViewModelProvider.Factory {
-//                override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-//                    return LocationViewModel(applicationContext) as T
-//                }
-//            }
-//        }
-//    )
-
-
 
     @ExperimentalMaterial3Api
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,13 +50,22 @@ class MainActivity : ComponentActivity() {
                     }
                 }.value
 
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background,
-                ) {
-                    ContactScreen(state = state, onEvent = contactViewModel::onEvent, onLocationEvent = locationViewModel::onEvent)
-                }
+                Surface {
+                    // Navigation
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = "contacts"
+                    ) {
+                        composable("contacts") {
+                            ContactScreen(state = state, onEvent = contactViewModel::onEvent, navController = navController)
+                        }
 
+                        composable("location") {
+                            LocationScreen(onEvent = locationViewModel::onEvent, navController = navController)
+                        }
+                    }
+                }
             }
         }
     }

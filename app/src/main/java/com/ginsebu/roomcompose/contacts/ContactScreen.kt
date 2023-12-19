@@ -5,10 +5,8 @@ import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -17,6 +15,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -31,15 +32,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ginsebu.roomcompose.location.LocationButton
-import com.ginsebu.roomcompose.location.LocationEvent
+import androidx.navigation.NavHostController
 
 @ExperimentalMaterial3Api
 @Composable
 fun ContactScreen(
     state: ContactState,
     onEvent: (ContactEvent) -> Unit,
-    onLocationEvent: (LocationEvent) -> Unit,
+    navController: NavHostController,
 ) {
     Scaffold(
         floatingActionButton = {
@@ -55,14 +55,27 @@ fun ContactScreen(
         modifier = Modifier.padding(16.dp),
     ) { padding ->
         if(state.isAddingContact) {
-            AddContactDialog(state = state, onEvent = onEvent)
+            FormContactDialog(state = state, onEvent = onEvent)
         }
 
         if(state.isDeleteContact) {
             DeleteContactDialog(state = state, onEvent = onEvent)
         }
-        
-        LocationButton(onEvent = onLocationEvent)
+
+        Row (
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.End,
+        ) {
+            Button(
+                onClick = {
+                    navController.navigate("location")
+                },
+                colors = ButtonDefaults.buttonColors(Color.Green)
+            ) {
+                Icon(imageVector = Icons.Default.LocationOn, contentDescription = "Location")
+            }
+        }
 
         LazyColumn(
             contentPadding = padding,

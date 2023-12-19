@@ -4,6 +4,7 @@ buildscript {
         compose_ui_version = "1.2.0"
         room_version = "2.5.0"
         location_service_version = "20.0.0"
+        navigation_version = "2.5.3"
     }
 }
 
